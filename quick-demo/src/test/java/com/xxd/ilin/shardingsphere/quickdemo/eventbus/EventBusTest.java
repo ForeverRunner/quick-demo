@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit;
 public class EventBusTest {
 
     @Autowired
-    private EventBusImpl eventBusTemplate;
+    private EventBusImpl eventBus;
 
     @Test
     public void testPush() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             LogEvent logEvent = LogEvent.builder().traceId(UUID.randomUUID().toString())
                     .msg("test\t" + i).build();
-            eventBusTemplate.pushEvent(logEvent);
+            eventBus.pushEvent(logEvent);
         }
         TimeUnit.SECONDS.sleep(10);
     }
