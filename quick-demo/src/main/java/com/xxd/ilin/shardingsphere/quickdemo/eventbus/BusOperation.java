@@ -8,7 +8,7 @@ public interface BusOperation {
     void register(EventListener eventListener);
 
     /**
-     * 发布时间
+     * 发布事件
      * @param event
      * @return
      */

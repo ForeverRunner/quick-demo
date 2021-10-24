@@ -1,6 +1,6 @@
 package com.xxd.ilin.shardingsphere.quickdemo.eventbus.config;
 
-import com.xxd.ilin.shardingsphere.quickdemo.eventbus.EventBusTemplate;
+import com.xxd.ilin.shardingsphere.quickdemo.eventbus.EventBusImpl;
 import com.xxd.ilin.shardingsphere.quickdemo.eventbus.EventListener;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;
@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@SpringBootApplication
+@Configuration
 public class EventBusConfig {
     @Autowired
     private ApplicationContext applicationContext;
@@ -26,11 +26,11 @@ public class EventBusConfig {
     @Value("${eventbus.thread.corepoolsize:20}")
     private int corePoolSize;
 
-    private static final String EVENT_BUS_THREAD_NAME = "EventBusT";
+    private static final String EVENT_BUS_THREAD_NAME = "MyEventBusT";
 
     @Bean
-    public EventBusTemplate eventBusTemplate() {
-        EventBusTemplate eventBusTemplate = EventBusTemplate.now();
+    public EventBusImpl eventBusTemplate() {
+        EventBusImpl eventBusTemplate = EventBusImpl.now();
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize, corePoolSize, 0L,
                 TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
             private AtomicInteger threadIndex = new AtomicInteger(0);

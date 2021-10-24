@@ -2,20 +2,22 @@ package com.xxd.ilin.shardingsphere.quickdemo.eventbus;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
+import com.sun.xml.internal.ws.Closeable;
 import org.springframework.util.Assert;
 
+import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-public class EventBusTemplate implements BusOperation {
+public class EventBusImpl implements BusOperation, Closeable {
     private List<EventListener> eventListeners = new ArrayList<>();
     private EventBus eventBus;
     private ExecutorService executorService;
 
 
-    public static EventBusTemplate now() {
-        EventBusTemplate eventBusTemplate = new EventBusTemplate();
+    public static EventBusImpl now() {
+        EventBusImpl eventBusTemplate = new EventBusImpl();
         eventBusTemplate.syncEventBus(new EventBus());
         return eventBusTemplate;
     }
@@ -45,7 +47,8 @@ public class EventBusTemplate implements BusOperation {
     }
 
     public void setEventListeners(List<EventListener> eventListeners) {
-        validateEventListeners(eventListeners);
+        Assert.notEmpty(eventListeners, "监听器列表不为空");
+        Assert.noNullElements(eventListeners, "监听器列表中元素不能为空");
         if (this.eventListeners != eventListeners) {
             this.eventListeners.clear();
             this.eventListeners.addAll(eventListeners);
@@ -55,15 +58,10 @@ public class EventBusTemplate implements BusOperation {
         });
     }
 
-    private void validateEventListeners(List<EventListener> eventListeners) {
-        Assert.notEmpty(eventListeners, "监听器列表不为空");
-        Assert.noNullElements(eventListeners, "监听器列表中元素不能为空");
-    }
-
-    public boolean shutdown() {
+    @Override
+    public void close() throws WebServiceException {
         if (executorService != null && !executorService.isShutdown()) {
-            return executorService.isShutdown();
+            executorService.isShutdown();
         }
-        return false;
     }
 }
