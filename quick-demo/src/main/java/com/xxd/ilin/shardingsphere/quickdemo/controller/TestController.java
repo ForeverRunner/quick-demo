@@ -18,7 +18,10 @@ public class TestController {
 
     @GetMapping("/sayHello2")
     public Result<String> sayHello2(@RequestParam("name") String name) {
-        int a = 10 / 0;
+//        int a = 10 / 0;
+        if ("dongfang".equals(name)){
+            throw new IllegalArgumentException("name不能dongfang");
+        }
         return Result.success(name + ",nice to meet you");
     }
 
