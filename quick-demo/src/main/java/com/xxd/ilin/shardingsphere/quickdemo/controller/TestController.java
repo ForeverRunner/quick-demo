@@ -1,6 +1,7 @@
 package com.xxd.ilin.shardingsphere.quickdemo.controller;
 
 import com.xxd.ilin.shardingsphere.quickdemo.controller.dto.Result;
+import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,9 @@ public class TestController {
         if ("dongfang".equals(name)){
             throw new IllegalArgumentException("name不能dongfang");
         }
-        return Result.success(name + ",nice to meet you");
+        String s = MDC.get("X-URL");
+
+        return Result.success(name + ",nice to meet you,"+s);
     }
 
 }

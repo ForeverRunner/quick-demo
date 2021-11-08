@@ -2,10 +2,10 @@ package com.xxd.ilin.shardingsphere.quickdemo.eventbus;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
-import com.sun.xml.internal.ws.Closeable;
 import org.springframework.util.Assert;
 
 import javax.xml.ws.WebServiceException;
+import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
