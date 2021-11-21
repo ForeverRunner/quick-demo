@@ -20,7 +20,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         Contact contact = new Contact("name", "url", "email");
-        return new ApiInfo("title", "description", "version"
+        return new ApiInfo("秒杀活动gateway1.0", "秒杀活动", "1.0"
                 , "termsOfServiceUrl", contact, "license", "licenseUrl", new ArrayList());
     }
 }

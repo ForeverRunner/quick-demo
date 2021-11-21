@@ -9,6 +9,7 @@
     <modules>
         <module>biz-common</module>
         <module>seckill-gateway</module>
+        <module>seckill-service</module>
     </modules>
     <name>myseckill</name>
     <description>myseckill</description>
@@ -17,6 +18,7 @@
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring.boot.version>2.2.7.RELEASE</spring.boot.version>
+        <dubbo.version>2.7.8</dubbo.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -40,6 +42,25 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

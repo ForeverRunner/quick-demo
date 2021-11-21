@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Result<T> implements Serializable {
     private int code;
     private String message;
-    private T t;
+    private T data;
 
     public Result(int code, String message, T t) {
         this.code = code;
         this.message = message;
-        this.t = t;
+        this.data = t;
     }
 
     public static Result success(Object t) {
@@ -37,11 +37,11 @@ public class Result<T> implements Serializable {
         this.message = message;
     }
 
-    public T getT() {
-        return t;
+    public T getData() {
+        return data;
     }
 
-    public void setT(T t) {
-        this.t = t;
+    public void setData(T data) {
+        this.data = data;
     }
 }

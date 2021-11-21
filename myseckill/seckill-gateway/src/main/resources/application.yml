@@ -1,0 +1,11 @@
+server:
+  port: 40004
+
+dubbo:
+  protocol:
+    name: dubbo
+    port: 50004
+  application:
+    id: seckill-gateway
+  registry:
+    address: nacos://110.42.251.213:8848
