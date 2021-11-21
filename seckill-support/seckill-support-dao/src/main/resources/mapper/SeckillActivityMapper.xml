@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxd.seckill.support.dao.mapper.SeckillActivityMapper">
+  <resultMap id="BaseResultMap" type="com.xxd.seckill.support.dao.model.SeckillActivity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="limit_num" jdbcType="INTEGER" property="limitNum" />
+    <result column="stock_num" jdbcType="INTEGER" property="stockNum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_list">
+    id,activity_name,product_id,start_time,end_time,limit_num,stock_num,status,picture_url,price,create_time,modify_time
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from seckill_activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xxd.seckill.support.dao.model.SeckillActivity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into seckill_activity (activity_name, product_id, start_time, 
+      end_time, limit_num, stock_num, 
+      status, picture_url, price, 
+      create_time, modify_time)
+    values (#{activityName,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{limitNum,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{pictureUrl,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xxd.seckill.support.dao.model.SeckillActivity">
+    update seckill_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      limit_num = #{limitNum,jdbcType=INTEGER},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, activity_name, product_id, start_time, end_time, limit_num, stock_num, 
+    status, picture_url, price, create_time, modify_time
+    from seckill_activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, activity_name, product_id, start_time, end_time, limit_num, stock_num, 
+    status, picture_url, price, create_time, modify_time
+    from seckill_activity
+  </select>
+
+
+  <select id="selectByProductId" resultMap="BaseResultMap" >
+    select *
+    FROM seckill_activity
+    WHERE product_id=#{productId}
+    AND status=1
+    ORDER BY id DESC
+    LIMIT 1
+  </select>
+
+
+  <select id="selectByCondition" resultMap="BaseResultMap" >
+    select
+    id,activity_name,product_id,start_time,end_time,limit_num,stock_num,status,picture_url,price,create_time,modify_time
+    from seckill_activity
+    where product_id = #{productId}
+    <if test="status != null">
+      and status = #{status}
+    </if>
+    order by id desc
+    limit 1
+  </select>
+
+  <update id="updateStatus">
+    update seckill_activity
+    set status = #{status}
+    where id = #{id}
+  </update>
+
+  <update id="updateStockNum">
+    update seckill_activity
+    set stock_num = stock_num - #{buyNum}
+    where id = #{id}
+  </update>
+</mapper>

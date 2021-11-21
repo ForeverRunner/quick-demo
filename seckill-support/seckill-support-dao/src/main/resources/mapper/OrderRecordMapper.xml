@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxd.seckill.support.dao.mapper.OrderRecordMapper">
+  <resultMap id="BaseResultMap" type="com.xxd.seckill.support.dao.model.OrderRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="buy_num" jdbcType="INTEGER" property="buyNum" />
+    <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xxd.seckill.support.dao.model.OrderRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_record (order_id, product_id, user_id, 
+      buy_num, order_price, address, 
+      pay_type, order_time, order_status, 
+      create_time, modify_time)
+    values (#{orderId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{buyNum,jdbcType=INTEGER}, #{orderPrice,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xxd.seckill.support.dao.model.OrderRecord">
+    update order_record
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      buy_num = #{buyNum,jdbcType=INTEGER},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, order_id, product_id, user_id, buy_num, order_price, address, pay_type, 
+    order_time, order_status, create_time, modify_time
+    from order_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_id, product_id, user_id, buy_num, order_price, address, pay_type, 
+    order_time, order_status, create_time, modify_time
+    from order_record
+  </select>
+  <sql id="Base_Column_List" >
+    id, order_id,product_id,user_id,buy_num,order_price,address,pay_type,order_time,order_status,create_time,modify_time
+  </sql>
+
+  <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from order_record
+    where order_id = #{orderId}
+  </select>
+
+  <update id="updateOrderStatus">
+    update order_record
+    set
+      order_status = #{orderStatus}
+    where
+      order_id = #{orderId}
+  </update>
+</mapper>

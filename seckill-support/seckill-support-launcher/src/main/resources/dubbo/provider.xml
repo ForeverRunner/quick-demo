@@ -1,0 +1,15 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <dubbo:service version="1.0" id="activityExportService"
+                   interface="com.xxd.seckill.support.export.export.ActivityExportService"
+                   class="com.xxd.seckill.support.launcher.export.ActivityExportServiceImpl"/>
+    <dubbo:service version="1.0" id="productExportService"
+                   interface="com.xxd.seckill.support.export.export.ProductExportService"
+                   class="com.xxd.seckill.support.launcher.export.ProductInfoExportServiceImpl"/>
+    <dubbo:service version="1.0" id="settlementExportService"
+                   interface="com.xxd.seckill.support.export.export.SettlementExportService"
+                   class="com.xxd.seckill.support.launcher.export.SettlementExportServiceImpl"/>
+</beans>

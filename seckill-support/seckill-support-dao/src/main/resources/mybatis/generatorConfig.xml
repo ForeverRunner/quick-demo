@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="mybatis/jdbc.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="${modelPackage}" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="${mapperPackage}" targetProject="src/main/java" type="XMLMAPPER"/>
+        <!-- sql占位符，表示所有的表 -->
+
+
+
+        <table tableName="order_record" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="product_info" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
+        <table tableName="seckill_activity" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
