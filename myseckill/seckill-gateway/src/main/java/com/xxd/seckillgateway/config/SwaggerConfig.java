@@ -2,6 +2,7 @@ package com.xxd.seckillgateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -19,8 +20,12 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("name", "url", "email");
-        return new ApiInfo("秒杀活动gateway1.0", "秒杀活动", "1.0"
-                , "termsOfServiceUrl", contact, "license", "licenseUrl", new ArrayList());
+        Contact contact = new Contact("xxd", "123@qq.com", "123@qq.com");
+        return new ApiInfoBuilder()
+                .contact(contact)
+                .title("秒杀活动")
+                .version("V1.0")
+                .description("秒杀活动")
+                .build();
     }
 }

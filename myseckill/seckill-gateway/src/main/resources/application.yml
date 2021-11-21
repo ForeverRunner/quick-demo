@@ -7,5 +7,11 @@ dubbo:
     port: 50004
   application:
     id: seckill-gateway
+    name: seckill-gateway
   registry:
-    address: nacos://110.42.251.213:8848
+    address: nacos://nacos.server:8848
+  consumer:
+    check: false
+    filter: traceFilter
+  provider:
+    filter: traceFilter
