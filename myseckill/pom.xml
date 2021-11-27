@@ -8,8 +8,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>biz-common</module>
-        <module>seckill-gateway</module>
+        <module>seckill</module>
         <module>seckill-service</module>
+        <module>seckill-gateway</module>
     </modules>
     <name>myseckill</name>
     <description>myseckill</description>

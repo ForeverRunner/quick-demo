@@ -1,17 +1,14 @@
 server:
-  port: 40004
+  port: 90
+
+
 
 dubbo:
   protocol:
     name: dubbo
-    port: 50004
+    port: 9004
   application:
     id: seckill-gateway
     name: seckill-gateway
   registry:
     address: nacos://nacos.server:8848
-  consumer:
-    check: false
-    filter: traceFilter
-  provider:
-    filter: traceFilter
