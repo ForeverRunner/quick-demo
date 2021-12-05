@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="mysql.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+<!--        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+<!--            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+<!--            &lt;!&ndash; caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true &ndash;&gt;-->
+<!--            <property name="caseSensitive" value="true"/>-->
+<!--        </plugin>-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="${modelPackage}" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="${mapperPackage}" targetProject="src/main/java" type="XMLMAPPER"/>
+        <!-- sql占位符，表示所有的表 -->
+
+
+        <table tableName="tb_user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_permission" domainObjectName="Permission">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="tb_role" domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="tb_user_role" domainObjectName="UserRole">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="tb_role_permission" domainObjectName="RolePermission">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>
