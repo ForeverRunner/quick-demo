@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   redis:
     lettuce:
       pool:
@@ -10,3 +12,10 @@ spring:
   cache:
     redis:
       key-prefix: oauth-
+  application:
+    name: quick-oauth2
+logging:
+  level:
+    org:
+      apache:
+        http: debug
